@@ -1,0 +1,14 @@
+.Filters {
+  margin: 15px;
+  display: flex;
+  justify-content: space-evenly;  
+}
+
+.Filters input, .Filters select {
+  font-size: 17px;
+}
+
+.Filters .Search {
+  height: 30px;
+  width: 250px;
+}
