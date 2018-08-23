@@ -1,19 +1,19 @@
-.Header {
+.header {
   background-color: darkslateblue;
   padding: 20px;
   color: white;
 }
 
-.Header-title {
+.header-title {
   font-size: 22px;
 }
 
-.Header-p {
+.header-p {
  font-size: 16px;
  text-align: left;
  line-height: 23px;
 }
 
-.Header-p a {
+.header-p-link {
   color: lightyellow;
 }
