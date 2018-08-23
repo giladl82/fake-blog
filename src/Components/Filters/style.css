@@ -1,14 +1,14 @@
-.Filters {
+.filters {
   margin: 15px;
   display: flex;
   justify-content: space-evenly;  
 }
 
-.Filters input, .Filters select {
+.filters-search, .filters-select {
   font-size: 17px;
 }
 
-.Filters .Search {
+.filters-search {
   height: 30px;
   width: 250px;
 }

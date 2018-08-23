@@ -9,9 +9,11 @@ const perPageOptions = [ '5', '10', '20', '50' ]
 
 const Filters = ( { searchBy, onSearchByChange, perPage, onPerPageChange } ) => {
   return (
-    <div className='Filters'>
-      <Search value={searchBy} onChange={onSearchByChange} />
+    <div className='filters'>
+      <Search className='filters-search' value={searchBy} onChange={onSearchByChange} />
+
       <Select
+        className='filters-select'
         options={perPageOptions}
         onChange={onPerPageChange}
         value={perPage.toString()}
