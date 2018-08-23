@@ -6,8 +6,6 @@ import Filters from '../Filters';
 
 import './style.css';
 
-import { fetachFriends } from '../../Bll/users';
-
 class App extends Component {
   state = {
     searchBy: '',
@@ -23,8 +21,8 @@ class App extends Component {
 
     this.setState( { perPage }, () => {
       const { perPage, pageNumber } = this.state;
-      fetachFriends( perPage, pageNumber )
-        .then( friends => { this.setState( friends ) } )
+    //   fetachFriends( perPage, pageNumber )
+    //     .then( friends => { this.setState( friends ) } )
     } );
   }
 
