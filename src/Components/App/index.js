@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Header from '../Header';
 import Filters from '../Filters';
+import Pager from '../Pager';
 // import Table from '../Table';
 
 import './style.css';
@@ -33,15 +34,20 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App">
+      <div className="app">
         <Header />          
-        <div className="App-intro">
+        <div className="app-intro">
           <Filters
             searchBy={this.state.searchBy}
             onSearchByChange={this.handleSearchByChange}
             perPage={this.state.perPage}
-            onPerPageChange={this.handlePerPageChange} />
+            onPerPageChange={this.handlePerPageChange} />            
         </div>
+        <Pager 
+          currentPage={1}
+          numOfPagesToDispaly={5}
+          totalPages={2}
+          />
       </div>
     );
   }
