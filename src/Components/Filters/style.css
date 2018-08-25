@@ -1,7 +1,9 @@
 .filters {
   margin: 15px;
   display: flex;
-  justify-content: space-evenly;  
+  justify-content: flex-start;  
+  font-size: 17px;  
+  line-height: 34px;
 }
 
 .filters-search, .filters-select {
@@ -11,4 +13,5 @@
 .filters-search {
   height: 30px;
   width: 250px;
+  margin-right: 25px;
 }
