@@ -2,6 +2,7 @@
   background-color: darkslateblue;
   padding: 20px;
   color: white;
+  text-align: left;
 }
 
 .header-title {
@@ -10,10 +11,13 @@
 
 .header-p {
  font-size: 16px;
- text-align: left;
  line-height: 23px;
 }
 
+<<<<<<< HEAD
 .header-p a {
+=======
+.header-p-link {
+>>>>>>> 4d52d73a0e878286dd5801dce008068ce5400d1c
   color: lightyellow;
 }
