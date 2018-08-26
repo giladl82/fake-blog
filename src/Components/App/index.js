@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Header from '../Header';
 import Filters from '../Filters';
 import Pager from '../Pager';
@@ -10,45 +9,38 @@ import './style.css';
 class App extends Component {
   state = {
     searchBy: '',
-    perPage: 10,
     pageNumber: 1,
     totalPage: undefined,
     totalFriends: undefined,
     friends: undefined
-  }
+  };
 
-  handlePerPageChange = event => {
-    const perPage = parseInt( event.target.value, 10 );
+  debounce;
 
-    this.setState( { perPage }, () => {
-      const { perPage, pageNumber } = this.state;
-    //   fetachFriends( perPage, pageNumber )
-    //     .then( friends => { this.setState( friends ) } )
-    } );
-  }
+  handleFiltersChange = filters => {
+    clearTimeout(this.debounce);
+    this.debounce = setTimeout(() => {
+      console.log(filters);
+    }, 500);
+  };
 
-  handleSearchByChange = event => {
-    const searchBy = event.target.value;
-    this.setState( { searchBy } );
-  }
-
-  render () {
+  render() {
     return (
-      <div className='app'>
-        <Header />          
-        <div className='app-intro'>
+      <div className="app">
+        <Header />
+        <div className="app-intro">
           <Filters
             searchBy={this.state.searchBy}
-            onSearchByChange={this.handleSearchByChange}
+            onFiltersChange={this.handleFiltersChange}
             perPage={this.state.perPage}
-            onPerPageChange={this.handlePerPageChange} />            
+          />
         </div>
-        <Pager 
-          urlPath='/'
+        <Pager
+          urlPath="/"
           currentPage={6}
           numOfPagesToDisplay={5}
           totalPages={25}
-          />
+        />
       </div>
     );
   }
