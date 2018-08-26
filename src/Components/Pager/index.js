@@ -1,31 +1,61 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './style.css';
 
-const renderPages = ({ currentPage, numOfPagesToDispaly, totalPages }) => {  
-  let pages = new Array(Math.min(numOfPagesToDispaly, totalPages));  
-  if(currentPage === 1) {
-    return pages.map()
-  } else {
-
+const verifyPagerClickProps = (props, propName, componentName) => {
+  if(!props.onClick && !props.urlPath) {
+    return new Error(
+      `You should supply with either urlPath or onClick event handler!`
+    );
   }
-}
+};
 
-const Pager = (props) => {
+const renderPages = ({ currentPage, numOfPagesToDisplay, totalPages, urlPath, onClick }) => {
+  const pages = new Array(Math.min(numOfPagesToDisplay, totalPages));
+  const middlePoint = parseInt(pages.length / 2, 10);
+
+  for (let index = 0; index < pages.length; index++) {
+    if (currentPage <= middlePoint) {
+      pages[index] = index + 1;
+    } else {
+      pages[index] = index + currentPage - middlePoint;
+    }
+  }
+
+  return pages.map(page => {
+    if (page === currentPage) {
+      return <span key={page} className='pager-current'>{page}</span>;
+    }
+
+    if(urlPath.endsWith('/')) {
+      urlPath = urlPath.substring(0, urlPath.length - 1);
+    }
+
+    return (
+
+      <a key={page} href={`${urlPath}/${page}`} onClick={onClick} className='pager-link'>
+        {page}
+      </a>
+    );
+  });
+};
+
+const Pager = props => {
   return (
     <nav className='pager'>
-      <ul>
-        {renderPages(props)}
-      </ul>
+      <ul>{renderPages(props)}</ul>
     </nav>
-  )
-}
+  );
+};
 
 Pager.propTypes = {
   currentPage: PropTypes.number.isRequired,
-  numOfPagesToDispaly: PropTypes.number.isRequired,
-  totalPages: PropTypes.number.isRequired
-}
+  numOfPagesToDisplay: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  urlPath: verifyPagerClickProps,
+  onClick: verifyPagerClickProps
+};
+
 
 export default Pager;

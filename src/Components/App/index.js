@@ -34,9 +34,9 @@ class App extends Component {
 
   render () {
     return (
-      <div className="app">
+      <div className='app'>
         <Header />          
-        <div className="app-intro">
+        <div className='app-intro'>
           <Filters
             searchBy={this.state.searchBy}
             onSearchByChange={this.handleSearchByChange}
@@ -44,9 +44,10 @@ class App extends Component {
             onPerPageChange={this.handlePerPageChange} />            
         </div>
         <Pager 
-          currentPage={1}
-          numOfPagesToDispaly={5}
-          totalPages={2}
+          urlPath='/'
+          currentPage={6}
+          numOfPagesToDisplay={5}
+          totalPages={25}
           />
       </div>
     );
