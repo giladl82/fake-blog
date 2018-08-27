@@ -1,15 +1,15 @@
 ## TODO
 
-- Transform 'Filters to class'
-- Load users for the SearchBox
-- Add debounce to searchbox change
 - Load post
 - Filter posts by number per page
 - Filter posts by user
-- Show posts 
+- Connect pager to resulted posts + per page
+- Show posts
 - Add router for Comments
 - Load + render Comments
 - **Write tests!**
------
-- *Move to redux*
+
+---
+
+- _Move to redux_
 - **Write tests to redux version**

@@ -1,0 +1,24 @@
+.pager {
+ display: flex;
+ justify-content: center;
+}
+
+.pager-current {
+  color: #444;
+  padding: 5px;
+  margin: 0 5px;
+  font-weight: 400;
+}
+
+.pager-link {
+  padding: 5px;
+  margin: 0 5px;
+  color:darkslateblue;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .3s ease;
+}
+
+.pager-link:hover {
+  color:rgb(127, 125, 141);
+}
