@@ -5,7 +5,7 @@ import { Select, Search } from '../Common';
 
 import './style.css';
 
-import { fetachUsers } from '../../Bll/users';
+import { fetchUsers } from '../../Bll/users';
 
 class Filters extends React.Component {
   perPageOptions = ['5', '10', '20', '50'];
@@ -45,7 +45,7 @@ class Filters extends React.Component {
   };
 
   componentDidMount() {
-    fetachUsers().then(data => {
+    fetchUsers().then(data => {
       const users = data.map(user => ({
         id: user.id.toString(),
         value: user.name
