@@ -8,11 +8,12 @@ import './style.css';
 import { fetchUsers } from '../../Bll/users';
 
 class Filters extends React.Component {
-  perPageOptions = ['5', '10', '20', '50'];
+  perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
 
   state = {
     filters: {
       searchBy: '',
+      userId: '',
       perPage: this.perPageOptions[0]
     },
     users: []
@@ -33,7 +34,9 @@ class Filters extends React.Component {
   };
 
   handlePerPageChange = event => {
-    const perPage = event.target.value;
+    const value = event.target.value;
+    const perPage = this.perPageOptions.filter(p => p.value === value)[0] || this.perPageOptions[0];
+
     this.setState(
       prevState => ({
         filters: { ...prevState.filters, perPage }
@@ -44,17 +47,20 @@ class Filters extends React.Component {
     );
   };
 
-  componentDidMount() {
+  componentDidMount () {
     fetchUsers().then(data => {
       const users = data.map(user => ({
-        id: user.id.toString(),
-        value: user.name
+        value: user.id.toString(),
+        text: user.name
       }));
+
+      users.unshift({ value: '', text: 'All users' })
+
       this.setState({ users });
     });
   }
 
-  render() {
+  render () {
     const { displaying } = this.props;
     const { filters, users } = this.state;
     return (
@@ -65,15 +71,25 @@ class Filters extends React.Component {
           dataList={users}
           onChange={this.handleSearchByChange}
         />
+
+        Show {displaying} for
+
+        <Select
+          className="filters-select"
+          options={this.state.users}
+          onChange={this.handlePerPageChange}
+          value={filters.userId}
+        />
+
         Number of {displaying}
-        &nbsp;
+
         <Select
           className="filters-select"
           options={this.perPageOptions}
           onChange={this.handlePerPageChange}
-          value={filters.perPage}
+          value={filters.perPage.value}
         />
-        &nbsp;per page
+        per page
       </div>
     );
   }

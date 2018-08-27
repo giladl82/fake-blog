@@ -16,7 +16,7 @@ export const Search = ({ className, value, onChange, dataList }) => {
         dataList.length && (
           <datalist id="dataList">
             {dataList.map(item => (
-              <option key={item.id} value={item.value} />
+              <option key={item.value} value={item.value} />
             ))}
           </datalist>
         )}
@@ -30,8 +30,7 @@ Search.propTypes = {
   onChange: PropTypes.func.isRequired,
   dataList: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
+      value: PropTypes.string
     })
   )
 };
