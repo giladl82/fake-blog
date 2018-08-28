@@ -11,8 +11,8 @@ class Filters extends React.Component {
   state = {
     filters: {
       searchBy: '',
-      userId: '',
-      perPage: this.props.perPageOptions[0]
+      userId: this.props.userIdDefaultValue || '0',
+      perPage: this.props.perPageDefaultValue || '0'
     },
     users: []
   };
@@ -37,7 +37,7 @@ class Filters extends React.Component {
 
     this.setState(
       prevState => ({
-        filters: { ...prevState.filters, perPage }
+        filters: { ...prevState.filters, perPage: perPage.value }
       }),
       () => {
         this.props.onFiltersChange(this.state.filters);
@@ -45,46 +45,50 @@ class Filters extends React.Component {
     );
   };
 
-  componentDidMount () {
+  handleUserChange = event => {
+    const userId = event.target.value;
+    this.setState(
+      prevState => ({
+        filters: { ...prevState.filters, userId }
+      }),
+      () => {
+        this.props.onFiltersChange(this.state.filters);
+      }
+    );
+  };
+
+  componentDidMount() {
     fetchUsers().then(data => {
       const users = data.map(user => ({
         value: user.id.toString(),
         text: user.name
       }));
 
-      users.unshift({ value: '', text: 'All users' })
+      users.unshift({ value: '', text: 'All users' });
 
       this.setState({ users });
     });
   }
 
-  render () {
+  render() {
     const { displaying } = this.props;
-    const { filters, users } = this.state;
+    const { filters } = this.state;
     return (
       <div className="filters">
-        <Search
-          className="filters-search"
-          value={filters.searchBy}
-          onChange={this.handleSearchByChange}
-        />
-
+        <Search className="filters-search" value={filters.searchBy} onChange={this.handleSearchByChange} />
         Show {displaying} for
-
         <Select
           className="filters-select"
           options={this.state.users}
-          onChange={this.handlePerPageChange}
+          onChange={this.handleUserChange}
           value={filters.userId}
         />
-
         Number of {displaying}
-
         <Select
           className="filters-select"
           options={this.props.perPageOptions}
           onChange={this.handlePerPageChange}
-          value={filters.perPage.value}
+          value={filters.perPage}
         />
         per page
       </div>
@@ -99,8 +103,10 @@ Filters.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
-    }).isRequired,
+    }).isRequired
   ).isRequired,
+  perPageDefaultValue: PropTypes.string,
+  userIdDefaultValue: PropTypes.string
 };
 
 Filters.defaultProps = {

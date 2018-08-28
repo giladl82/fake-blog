@@ -6,14 +6,24 @@ import Posts from '../Posts';
 
 import './style.css';
 
-import { fetchPosts } from '../../Bll/posts'
+import { fetchPosts } from '../../Bll/posts';
 
 class App extends Component {
-  perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
+  perPageOptions = [
+    { value: '5', text: '5' },
+    { value: '10', text: '10' },
+    { value: '20', text: '20' },
+    { value: '50', text: '50' }
+  ];
+
+  defaultFilters = {
+    searchBy: '',
+    userId: '0',
+    perPage: '10'
+  };
 
   state = {
     posts: [],
-    searchBy: '',
     pageNumber: 1,
     totalPage: undefined,
     totalFriends: undefined,
@@ -25,16 +35,21 @@ class App extends Component {
   handleFiltersChange = filters => {
     clearTimeout(this.debounce);
     this.debounce = setTimeout(() => {
-      console.log(filters);
+      const { perPage, searchBy, userId } = filters; 
+      fetchPosts(1, perPage, searchBy, userId).then(posts => {
+        this.setState({ posts });
+      });
     }, 500);
   };
 
-  componentDidMount () {
-    const perPage = parseInt(this.perPageOptions[0].value, 10);
-    fetchPosts(perPage, 1, '').then(posts => { this.setState({ posts }) });
+  componentDidMount() {
+    const { perPage, searchBy, userId } = this.defaultFilters;
+    fetchPosts(1, perPage, searchBy, userId).then(posts => {
+      this.setState({ posts });
+    });
   }
 
-  render () {
+  render() {
     return (
       <div className="app">
         <Header />
@@ -42,15 +57,12 @@ class App extends Component {
           <Filters
             onFiltersChange={this.handleFiltersChange}
             perPageOptions={this.perPageOptions}
+            userIdDefaultValue="3"
+            perPageDefaultValue={this.perPageOptions[2].value}
           />
         </div>
         <Posts posts={this.state.posts} />
-        <Pager
-          urlPath="/"
-          currentPage={6}
-          numOfPagesToDisplay={5}
-          totalPages={25}
-        />
+        <Pager urlPath="/" currentPage={6} numOfPagesToDisplay={5} totalPages={25} />
       </div>
     );
   }
