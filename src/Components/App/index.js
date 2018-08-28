@@ -24,15 +24,13 @@ class App extends Component {
     }, 500);
   };
 
-  render() {
+  render () {
     return (
       <div className="app">
         <Header />
         <div className="app-intro">
           <Filters
-            searchBy={this.state.searchBy}
             onFiltersChange={this.handleFiltersChange}
-            perPage={this.state.perPage}
           />
         </div>
         <Pager
