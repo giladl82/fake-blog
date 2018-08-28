@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import Filters from '../Filters';
 import Pager from '../Pager';
-// import Table from '../Table';
+import Posts from '../Posts';
 
 import './style.css';
 
@@ -12,6 +12,7 @@ class App extends Component {
   perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
 
   state = {
+    posts: [],
     searchBy: '',
     pageNumber: 1,
     totalPage: undefined,
@@ -30,7 +31,7 @@ class App extends Component {
 
   componentDidMount () {
     const perPage = parseInt(this.perPageOptions[0].value, 10);
-    fetchPosts(perPage, 1, '').then(posts => console.log(posts));
+    fetchPosts(perPage, 1, '').then(posts => this.setState({posts}));
   }
 
   render () {
@@ -43,6 +44,7 @@ class App extends Component {
             perPageOptions={this.perPageOptions}
           />
         </div>
+        <Posts posts={this.state.posts} />
         <Pager
           urlPath="/"
           currentPage={6}
