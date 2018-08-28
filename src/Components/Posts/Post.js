@@ -5,7 +5,7 @@ const Post = ({ data }) => {
   return (
     <div className='post'>
       <h2 className='post-title'>{data.title}</h2>
-      <div className='post-creator'>{data.userName}</div>
+      {data.userName && <div className='post-creator'>By: {data.userName}</div>}
       <div className='post-summary'>{data.body}</div>
     </div>
   )

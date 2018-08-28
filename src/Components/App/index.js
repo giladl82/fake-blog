@@ -31,7 +31,7 @@ class App extends Component {
 
   componentDidMount () {
     const perPage = parseInt(this.perPageOptions[0].value, 10);
-    fetchPosts(perPage, 1, '').then(posts => this.setState({posts}));
+    fetchPosts(perPage, 1, '').then(posts => { this.setState({ posts }) });
   }
 
   render () {
