@@ -8,13 +8,11 @@ import './style.css';
 import { fetchUsers } from '../../Bll/users';
 
 class Filters extends React.Component {
-  perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
-
   state = {
     filters: {
       searchBy: '',
       userId: '',
-      perPage: this.perPageOptions[0]
+      perPage: this.props.perPageOptions[0]
     },
     users: []
   };
@@ -35,7 +33,7 @@ class Filters extends React.Component {
 
   handlePerPageChange = event => {
     const value = event.target.value;
-    const perPage = this.perPageOptions.filter(p => p.value === value)[0] || this.perPageOptions[0];
+    const perPage = this.props.perPageOptions.filter(p => p.value === value)[0] || this.perPageOptions[0];
 
     this.setState(
       prevState => ({
@@ -85,7 +83,7 @@ class Filters extends React.Component {
 
         <Select
           className="filters-select"
-          options={this.perPageOptions}
+          options={this.props.perPageOptions}
           onChange={this.handlePerPageChange}
           value={filters.perPage.value}
         />
@@ -97,7 +95,13 @@ class Filters extends React.Component {
 
 Filters.propTypes = {
   displaying: PropTypes.string,
-  onFiltersChange: PropTypes.func.isRequired
+  onFiltersChange: PropTypes.func.isRequired,
+  perPageOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired
+    }).isRequired,
+  ).isRequired,
 };
 
 Filters.defaultProps = {

@@ -7,6 +7,8 @@ import Pager from '../Pager';
 import './style.css';
 
 class App extends Component {
+  perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
+
   state = {
     searchBy: '',
     pageNumber: 1,
@@ -31,6 +33,7 @@ class App extends Component {
         <div className="app-intro">
           <Filters
             onFiltersChange={this.handleFiltersChange}
+            perPageOptions={this.perPageOptions}
           />
         </div>
         <Pager
