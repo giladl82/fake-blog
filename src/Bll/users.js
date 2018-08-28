@@ -1,6 +1,6 @@
 let cachedUsers = undefined;
 
-export const fetchUsers = () => {
+export const getUsers = () => {
   if(cachedUsers) {
     return Promise.resolve(cachedUsers)
   }

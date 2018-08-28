@@ -1,9 +1,9 @@
-import { fetchUsers, findUserById } from './users';
+import { getUsers, findUserById } from './users';
 
 const filterPostsByText = (posts, filterText) => posts.filter(post => post.title.includes(filterText));
 const filterPostByUserId = (posts, userId) => posts.filter(post => post.userId.toString() === userId || !userId);
 
-export const fetchPosts = (currentPageNumber, numberOfPostsPerPage, filterText, userId) => {
+export const getPosts = (currentPageNumber, numberOfPostsPerPage, filterText, userId) => {
   return new Promise(resolve => {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
@@ -14,7 +14,7 @@ export const fetchPosts = (currentPageNumber, numberOfPostsPerPage, filterText, 
         
         filterPosts = filterPostByUserId(filterPosts, userId);
         filterPosts = filterPosts.slice(startIndex, startIndex + numberOfPostsPerPage);
-        fetchUsers().then(users => {
+        getUsers().then(users => {
           filterPosts.forEach(post => {
             const user = findUserById(users, post.userId);
             if (user) {

@@ -6,7 +6,7 @@ import Posts from '../Posts';
 
 import './style.css';
 
-import { fetchPosts } from '../../Bll/posts';
+import { getPosts } from '../../Bll/posts';
 
 class App extends Component {
   perPageOptions = [
@@ -36,7 +36,7 @@ class App extends Component {
     clearTimeout(this.debounce);
     this.debounce = setTimeout(() => {
       const { perPage, searchBy, userId } = filters; 
-      fetchPosts(1, perPage, searchBy, userId).then(posts => {
+      getPosts(1, perPage, searchBy, userId).then(posts => {
         this.setState({ posts });
       });
     }, 500);
@@ -44,7 +44,7 @@ class App extends Component {
 
   componentDidMount() {
     const { perPage, searchBy, userId } = this.defaultFilters;
-    fetchPosts(1, perPage, searchBy, userId).then(posts => {
+    getPosts(1, perPage, searchBy, userId).then(posts => {
       this.setState({ posts });
     });
   }

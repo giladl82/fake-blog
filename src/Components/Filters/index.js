@@ -5,7 +5,7 @@ import { Select, Search } from '../Common';
 
 import './style.css';
 
-import { fetchUsers } from '../../Bll/users';
+import { getUsers } from '../../Bll/users';
 
 class Filters extends React.Component {
   state = {
@@ -58,7 +58,7 @@ class Filters extends React.Component {
   };
 
   componentDidMount() {
-    fetchUsers().then(data => {
+    getUsers().then(data => {
       const users = data.map(user => ({
         value: user.id.toString(),
         text: user.name
