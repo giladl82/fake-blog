@@ -6,6 +6,8 @@ import Pager from '../Pager';
 
 import './style.css';
 
+import { fetchPosts } from '../../Bll/posts'
+
 class App extends Component {
   perPageOptions = [{ value: '5', text: '5' }, { value: '10', text: '10' }, { value: '20', text: '20' }, { value: '50', text: '50' }];
 
@@ -25,6 +27,11 @@ class App extends Component {
       console.log(filters);
     }, 500);
   };
+
+  componentDidMount () {
+    const perPage = parseInt(this.perPageOptions[0].value, 10);
+    fetchPosts(perPage, 1, '').then(posts => console.log(posts));
+  }
 
   render () {
     return (
