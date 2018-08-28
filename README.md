@@ -1,6 +1,5 @@
 ## TODO
 
-- Load post
 - Filter posts by number per page
 - Filter posts by user
 - Connect pager to resulted posts + per page
