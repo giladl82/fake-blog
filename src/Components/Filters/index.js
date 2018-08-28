@@ -66,7 +66,6 @@ class Filters extends React.Component {
         <Search
           className="filters-search"
           value={filters.searchBy}
-          dataList={users}
           onChange={this.handleSearchByChange}
         />
 
