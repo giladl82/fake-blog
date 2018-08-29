@@ -11,7 +11,7 @@ class Filters extends React.Component {
   state = {
     filters: {
       searchBy: '',
-      userId: this.props.userIdDefaultValue || '0',
+      userId: this.props.userIdDefaultValue || '',
       perPage: this.props.perPageDefaultValue || '0'
     },
     users: []

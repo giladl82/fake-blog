@@ -18,7 +18,7 @@ class App extends Component {
 
   defaultFilters = {
     searchBy: '',
-    userId: '0',
+    userId: '',
     perPage: '10'
   };
 
@@ -35,7 +35,7 @@ class App extends Component {
   handleFiltersChange = filters => {
     clearTimeout(this.debounce);
     this.debounce = setTimeout(() => {
-      const { perPage, searchBy, userId } = filters; 
+      const { perPage, searchBy, userId } = filters;
       getPosts(1, perPage, searchBy, userId).then(posts => {
         this.setState({ posts });
       });
@@ -57,8 +57,8 @@ class App extends Component {
           <Filters
             onFiltersChange={this.handleFiltersChange}
             perPageOptions={this.perPageOptions}
-            userIdDefaultValue="3"
-            perPageDefaultValue={this.perPageOptions[2].value}
+            userIdDefaultValue={this.defaultFilters.userId}
+            perPageDefaultValue={this.defaultFilters.perPage}
           />
         </div>
         <Posts posts={this.state.posts} />
