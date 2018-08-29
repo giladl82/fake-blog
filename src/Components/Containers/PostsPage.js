@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
 
 import Filters from '../Filters';
 import Pager from '../Pager';
@@ -85,4 +84,4 @@ class PostsPage extends Component {
   }
 }
 
-export default withRouter(PostsPage);
+export default PostsPage;
