@@ -5,8 +5,6 @@ import PostsPage from '../Containers/PostsPage';
 
 import './style.css';
 
-import { getPosts } from '../../Bll/posts';
-
 class App extends Component {
   render () {
     return (
