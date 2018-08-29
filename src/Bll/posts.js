@@ -19,7 +19,7 @@ const fetchPosts = () =>
     }
   });
 
-export const getPosts = (currentPageNumber, {perPage, searchBy, userId}) => {
+export const getPosts = (currentPageNumber, { perPage, searchBy, userId }) => {
   return new Promise(resolve => {
     fetchPosts().then(posts => {
       perPage = parseInt(perPage, 10);
@@ -45,3 +45,15 @@ export const getPosts = (currentPageNumber, {perPage, searchBy, userId}) => {
     });
   });
 };
+
+export const getPost = postId => (new Promise(resolve => {
+  fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+    .then(response => response.json())
+    .then(post => {
+      fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+      .then(response => response.json())
+      .then(comments => {
+          resolve({ ...post, comments });
+        })
+    });
+}))

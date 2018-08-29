@@ -1,12 +1,5 @@
-.posts {
-  padding: 15px;
-  text-align: left;
-}
-
 .post {
-  padding-bottom: 15px;
   margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
 }
 
 .post-title {
@@ -25,4 +18,11 @@
   font-size: 14px;
   margin-top: 8px;
   color:#555;
+ }
+
+ .post-link {
+  font-size: 14px;
+  margin-top: 8px;
+  color:#0041ff;
+  display: block;
  }

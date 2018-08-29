@@ -1,0 +1,16 @@
+.posts-container {
+  margin: 15px;
+  text-align: left;
+}
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.posts-create-button {
+  margin: 15px;
+  font-size: 17px;
+  line-height: 33px;
+  justify-self: right;
+}

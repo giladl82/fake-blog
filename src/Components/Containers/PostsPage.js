@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
+import Loader from '../Loader';
 import Filters from '../Filters';
 import Pager from '../Pager';
-import Posts from '../Posts';
+import PostsList from '../PostsList';
 
 import { getUsers } from '../../Bll/users';
 import { getPosts } from '../../Bll/posts';
 
+import './style.css';
+
 const DEFAULT_POSTS_PER_PAGE = 5;
 
-class PostsPage extends Component {
+export class PostsPage extends Component {
   perPageOptions = [
     { value: '5', text: '5' },
     { value: '10', text: '10' },
@@ -59,7 +63,7 @@ class PostsPage extends Component {
       }));
       users.unshift({ value: '', text: 'All users' });
       this.setState({ users });
-      this.handleFiltersChange(this.state.filters)
+      this.getPosts();
     });
   }
 
@@ -69,16 +73,21 @@ class PostsPage extends Component {
     const totalPages = Math.ceil(totalPostsCount / filters.perPage);
 
     return (
-      <React.Fragment>
-        <Filters
-          filters={filters}
-          onFiltersChange={this.handleFiltersChange}
-          perPageOptions={this.perPageOptions}
-          usersOptions={users}
-        />
-        <Posts posts={this.state.posts} />
-        <Pager urlPath='/posts' currentPage={currentPage} numOfPagesToDisplay={5} totalPages={totalPages} onClick={this.handlePagerLinkClick} />
-      </React.Fragment>
+      <div className='posts-container'>
+        {!this.state.posts.length ? <Loader /> : <React.Fragment>
+          <div className='posts-header'>
+            <Filters
+              filters={filters}
+              onFiltersChange={this.handleFiltersChange}
+              perPageOptions={this.perPageOptions}
+              usersOptions={users}
+            />
+            <Link className='posts-create-button' to='/create'>Create a new Post</Link>
+          </div>
+          <PostsList posts={this.state.posts} />
+          <Pager urlPath='/posts' currentPage={currentPage} numOfPagesToDisplay={5} totalPages={totalPages} onClick={this.handlePagerLinkClick} />
+        </React.Fragment>}
+      </div>
     );
   }
 }
