@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Select, Search } from '../Common';
-
+import { selectOptions, selectValueType } from '../../Bll/common';
 import './style.css';
 
 class Filters extends React.Component {
@@ -53,22 +53,12 @@ class Filters extends React.Component {
 Filters.propTypes = {
   filters: PropTypes.shape({
     searchBy: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
-    perPage: PropTypes.string.isRequired
+    userId: selectValueType,
+    perPage: selectValueType
   }).isRequired,
   onFiltersChange: PropTypes.func.isRequired,
-  perPageOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
-  usersOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
+  perPageOptions: selectOptions,
+  usersOptions: selectOptions
 };
 
 

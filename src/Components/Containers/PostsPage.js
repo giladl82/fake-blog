@@ -8,7 +8,7 @@ import Posts from '../Posts';
 import { getUsers } from '../../Bll/users';
 import { getPosts } from '../../Bll/posts';
 
-const DEFAULT_POSTS_PER_PAGE = '10'
+const DEFAULT_POSTS_PER_PAGE = 5;
 
 class PostsPage extends Component {
   perPageOptions = [
