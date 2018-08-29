@@ -14,3 +14,40 @@
   line-height: 33px;
   justify-self: right;
 }
+
+.create-form {
+  width: 400px;
+  margin: auto;
+}
+
+.form-line {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input {
+  width: 300px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.form-cancel {
+  margin-right: 30px;
+  font-size: 13px;
+  color: #bbb;
+}
+
+.form-submit {
+  background-color: #483d8b;
+  border: none;
+  color: #eee;
+  font-size: 16px;
+  padding: 0 15px;
+}

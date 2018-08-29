@@ -1,4 +1,4 @@
 import PostsPage from './PostsPage';
 import PostPage from './PostPage';
-
-export { PostsPage, PostPage }
+import CreatePage from './CreatePage';
+export { CreatePage, PostsPage, PostPage }
