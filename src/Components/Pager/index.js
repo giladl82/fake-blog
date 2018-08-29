@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './style.css';
 
 const verifyPagerClickProps = (props, propName, componentName) => {
-  if(!props.onClick && !props.urlPath) {
+  if (!props.onClick && !props.urlPath) {
     return new Error(
       `You should supply with either urlPath or onClick event handler!`
     );
@@ -28,15 +29,15 @@ const renderPages = ({ currentPage, numOfPagesToDisplay, totalPages, urlPath, on
       return <span key={page} className='pager-current'>{page}</span>;
     }
 
-    if(urlPath.endsWith('/')) {
+    if (urlPath.endsWith('/')) {
       urlPath = urlPath.substring(0, urlPath.length - 1);
     }
 
     return (
 
-      <a key={page} href={`${urlPath}/${page}`} onClick={onClick} className='pager-link'>
+      <Link key={page} to={`${urlPath}/${page}`} onClick={onClick} className='pager-link'>
         {page}
-      </a>
+      </Link>
     );
   });
 };
