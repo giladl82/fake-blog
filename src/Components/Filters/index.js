@@ -5,88 +5,42 @@ import { Select, Search } from '../Common';
 
 import './style.css';
 
-import { getUsers } from '../../Bll/users';
-
 class Filters extends React.Component {
-  state = {
-    filters: {
-      searchBy: '',
-      userId: this.props.userIdDefaultValue || '',
-      perPage: this.props.perPageDefaultValue || '0'
-    },
-    users: []
-  };
-
   handleSearchByChange = event => {
     const searchBy = event.target.value;
-    this.setState(
-      prevState => {
-        return {
-          filters: { ...prevState.filters, searchBy }
-        };
-      },
-      () => {
-        this.props.onFiltersChange(this.state.filters);
-      }
-    );
+    const filters = { ...this.props.filters }
+    this.props.onFiltersChange({ ...filters, searchBy });
   };
 
   handlePerPageChange = event => {
     const value = event.target.value;
     const perPage = this.props.perPageOptions.filter(p => p.value === value)[0] || this.perPageOptions[0];
-
-    this.setState(
-      prevState => ({
-        filters: { ...prevState.filters, perPage: perPage.value }
-      }),
-      () => {
-        this.props.onFiltersChange(this.state.filters);
-      }
-    );
+    const filters = { ...this.props.filters }
+    this.props.onFiltersChange({ ...filters, perPage: perPage.value });
   };
 
   handleUserChange = event => {
     const userId = event.target.value;
-    this.setState(
-      prevState => ({
-        filters: { ...prevState.filters, userId }
-      }),
-      () => {
-        this.props.onFiltersChange(this.state.filters);
-      }
-    );
+    const filters = { ...this.props.filters }
+    this.props.onFiltersChange({ ...filters, userId });
   };
 
-  componentDidMount() {
-    getUsers().then(data => {
-      const users = data.map(user => ({
-        value: user.id.toString(),
-        text: user.name
-      }));
-
-      users.unshift({ value: '', text: 'All users' });
-
-      this.setState({ users });
-    });
-  }
-
-  render() {
-    const { displaying } = this.props;
-    const { filters } = this.state;
+  render () {
+    const { filters, usersOptions, perPageOptions } = this.props;
     return (
       <div className="filters">
         <Search className="filters-search" value={filters.searchBy} onChange={this.handleSearchByChange} />
-        Show {displaying} for
+        Show posts for
         <Select
           className="filters-select"
-          options={this.state.users}
+          options={usersOptions}
           onChange={this.handleUserChange}
           value={filters.userId}
         />
-        Number of {displaying}
+        Number of posts
         <Select
           className="filters-select"
-          options={this.props.perPageOptions}
+          options={perPageOptions}
           onChange={this.handlePerPageChange}
           value={filters.perPage}
         />
@@ -97,7 +51,11 @@ class Filters extends React.Component {
 }
 
 Filters.propTypes = {
-  displaying: PropTypes.string,
+  filters: PropTypes.shape({
+    searchBy: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    perPage: PropTypes.string.isRequired
+  }).isRequired,
   onFiltersChange: PropTypes.func.isRequired,
   perPageOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -105,12 +63,13 @@ Filters.propTypes = {
       text: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,
-  perPageDefaultValue: PropTypes.string,
-  userIdDefaultValue: PropTypes.string
+  usersOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
 };
 
-Filters.defaultProps = {
-  displaying: 'posts'
-};
 
 export default Filters;

@@ -35,7 +35,7 @@ const renderPages = ({ currentPage, numOfPagesToDisplay, totalPages, urlPath, on
 
     return (
 
-      <Link key={page} to={`${urlPath}/${page}`} onClick={onClick} className='pager-link'>
+      <Link key={page} to={`${urlPath}/${page}`} onClick={() => { onClick(page) }} className='pager-link'>
         {page}
       </Link>
     );

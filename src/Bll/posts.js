@@ -19,15 +19,19 @@ const fetchPosts = () =>
     }
   });
 
-export const getPosts = (currentPageNumber, numberOfPostsPerPage, filterText, userId) => {
+export const getPosts = (currentPageNumber, {perPage, searchBy, userId}) => {
   return new Promise(resolve => {
     fetchPosts().then(posts => {
-      numberOfPostsPerPage = parseInt(numberOfPostsPerPage, 10);
-      const startIndex = (currentPageNumber - 1) * numberOfPostsPerPage;
-      let filterPosts = filterPostsByText(posts, filterText);
+      perPage = parseInt(perPage, 10);
+      const startIndex = (currentPageNumber - 1) * perPage;
+      let filterPosts = filterPostsByText(posts, searchBy);
 
       filterPosts = filterPostByUserId(filterPosts, userId);
-      filterPosts = filterPosts.slice(startIndex, startIndex + numberOfPostsPerPage);
+
+      const totalPostsCount = filterPosts.length;
+
+      filterPosts = filterPosts.slice(startIndex, startIndex + perPage);
+
       getUsers().then(users => {
         filterPosts.forEach(post => {
           const user = findUserById(users, post.userId);
@@ -36,7 +40,7 @@ export const getPosts = (currentPageNumber, numberOfPostsPerPage, filterText, us
           }
         });
 
-        resolve(filterPosts);
+        resolve({ posts: filterPosts, totalPostsCount });
       });
     });
   });
