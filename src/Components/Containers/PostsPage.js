@@ -32,7 +32,6 @@ class PostsPage extends Component {
   debounce;
 
   getPosts = (pageNumber = this.props.match.params.page) => {
-    console.log(pageNumber)
     getPosts(pageNumber, this.state.filters).then(posts => {
       this.setState({ ...posts });
     });
