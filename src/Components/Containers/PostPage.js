@@ -5,6 +5,7 @@ import Post from '../Post';
 import Comment from '../Comment';
 
 import { getPost } from '../../Bll/posts';
+import { redirectToPrevPage } from '../../Bll/common';
 
 import './style.css';
 
@@ -15,11 +16,8 @@ export class PostPage extends Component {
 
   handleGoBackClick = event => {
     event.preventDefault();
-    if (this.props.location.state.from === window.location.host) {
-      this.props.history.goBack();
-    } else {
-      this.props.history.push('/posts/1');
-    }
+    const { location, history } = this.props;
+    redirectToPrevPage(location, history);
   }
 
   componentDidMount () {

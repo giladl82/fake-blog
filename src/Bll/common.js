@@ -11,3 +11,11 @@ export const selectOptions = PropTypes.arrayOf(
     text: PropTypes.string.isRequired
   }).isRequired,
 ).isRequired;
+
+export const redirectToPrevPage = (location, history) => {
+  if (location.state.from === window.location.host) {
+    history.goBack();
+  } else {
+    history.push('/posts/1');
+  }
+}

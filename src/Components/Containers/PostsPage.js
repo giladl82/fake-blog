@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Loader from '../Loader';
 import Filters from '../Filters';
@@ -82,7 +82,7 @@ export class PostsPage extends Component {
               perPageOptions={this.perPageOptions}
               usersOptions={users}
             />
-            <Link className='posts-create-button' to='/create'>Create a new Post</Link>
+            <Link className='posts-create-button' to={{ pathname: '/create', state: { from: window.location.host } }}>Create a new Post</Link>
           </div>
           <PostsList posts={this.state.posts} />
           <Pager urlPath='/posts' currentPage={currentPage} numOfPagesToDisplay={5} totalPages={totalPages} onClick={this.handlePagerLinkClick} />
