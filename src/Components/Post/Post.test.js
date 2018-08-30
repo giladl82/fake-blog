@@ -3,18 +3,26 @@ import { shallow } from 'enzyme';
 
 import Post from '.';
 
+import { posts } from '../../Bll/mocks/posts';
+
 describe('Post Component', () => {
-  const post = {
-    id: 1,
-    userId: 1,
-    userName: 'The Autor name',
-    title: 'This is the tile for the post',
-    body: 'This is the body for the post'
-  };
+  const post = posts[0];
 
-  it('Should have on post with a title, author and body ', () => {
-    const wrapper = shallow(<Post data={post} />)
+  const wrapper = shallow(<Post data={post} />);
 
-    expect(wrapper.find('.post').length).toBe(1)
+  it('Should have a single post', () => {
+    expect(wrapper.find('.post').length).toBe(1);
+  });
+
+  it('Should have a title matching post.title', () => {
+    expect(wrapper.find('.post-title').text()).toBe(post.title);
+  });
+
+  it('Should have an author matching post.userName', () => {
+    expect(wrapper.find('.post-creator').text()).toContain(`${post.userName}`);
+  });
+
+  it('Should have a body matching post.body', () => {
+    expect(wrapper.find('.post-summary').text()).toBe(`${post.body}`);
   });
 });
