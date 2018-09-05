@@ -11,7 +11,8 @@ export const fetchPosts = () =>
 
 export const fetchPost = postId =>
   new Promise(resolve => {
-    resolve(posts.find(post => post.id === postId));
+    resolve(posts.find(post => {
+      return post.id === Number(postId)}));
   });
 
 export const fetchComments = postId =>
