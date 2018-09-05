@@ -1,4 +1,4 @@
-import { getUsers, findUserById } from './users';
+import { getUsers, getUserById } from './users';
 
 const filterPostsByText = (posts, filterText) => posts.filter(post => post.title.includes(filterText));
 const filterPostByUserId = (posts, userId) => posts.filter(post => post.userId.toString() === userId || !userId);
@@ -34,7 +34,7 @@ export const getPosts = (currentPageNumber, { perPage, searchBy, userId }) => {
 
       getUsers().then(users => {
         filterPosts.forEach(post => {
-          const user = findUserById(users, post.userId);
+          const user = getUserById(users, post.userId);
           if (user) {
             post.userName = user.name;
           }
