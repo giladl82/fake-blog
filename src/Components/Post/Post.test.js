@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Post from '.';
 
-import { posts } from '../../Bll/mocks/posts';
+import { posts } from '../../__mocks__/__data/posts';
 
 describe('Post Component', () => {
   const post = posts[0];
