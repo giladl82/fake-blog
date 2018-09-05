@@ -1,22 +1,24 @@
 import { getUserById, getUsers } from './users';
 
-jest.mock('./users');
+jest.mock('./fetch');
 
 describe('Bll/users getUserById', () => {
   let users;
   beforeAll(() => {
-    console.log('beforeAll', users)
-    return getUsers().then(users => {
-      console.log('beforeAll - then', users)
-      users = users;
-      return users;
+    return getUsers().then(data => {
+      users = data;
+      return data;
     });
   });
 
-  test('Should find requested user when found or return null / undefined', () => {
-    console.log('test', users)
+  it('Should find requested user', () => {
     const userName = users[0].name;
     const user = getUserById(users, users[0].id);
-    expect(user.userName).toBe(userName);
+    expect(user.name).toBe(userName);
+  });
+
+  it('Should find undefined', () => {
+    const user = getUserById(users, 0);
+    expect(user).toBeUndefined();
   });
 });
