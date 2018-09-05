@@ -1,7 +1,5 @@
 import { users } from './__data/users';
-const getUsers = () =>
+export const getUsers = () =>
   new Promise(resolve => {
     resolve(users);
   });
-
-export default getUsers;
