@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { posts } from '../../Bll/mocks/posts';
+import { posts } from '../../Bll/__mocks__/__data/posts';
 
 import PostsList from '.';
 
